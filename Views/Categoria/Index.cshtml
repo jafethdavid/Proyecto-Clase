@@ -1,0 +1,72 @@
+﻿@model List<IS_161_Proyecto_Grupo2.Models.Categoria>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Lista de Categorías</h2>
+    <a href="/Categoria/Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Nueva Categoría
+    </a>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info text-center">
+                No hay categorías registradas. <a href="/Categoria/Create">Crear la primera</a>
+            </div>
+        }
+        else
+        {
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Subcategoría de</th>
+                        <th>Agregar Subcategoría</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr class="text-center">
+                            <td>@item.IdCategoria</td>
+                            <td>@item.Nombre</td>
+                            <td>
+                                @if (item.Subcategorias != null && item.Subcategorias.Any())
+                                {
+                                    <ul class="list-unstyled mb-0">
+                                        @foreach(var s in item.Subcategorias)
+                                        {
+                                            <li><span class="badge bg-secondary">@s.Nombre</span></li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">-</span>
+                                }
+                            </td>
+                            <td>
+                                <a href="/Subcategoria/Create?idCategoria=@item.IdCategoria"
+                                   class="btn btn-sm btn-success @((Model.Count == 0) ? "disabled" : "")">
+                                    <i class="bi bi-plus-lg"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/Categoria/Edit/@item.IdCategoria" class="btn btn-warning btn-sm">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="/Categoria/Delete/@item.IdCategoria" class="btn btn-danger btn-sm"
+                                   onclick="return confirm('¿Eliminar @item.Nombre?')">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

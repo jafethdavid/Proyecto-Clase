@@ -1,0 +1,33 @@
+﻿@model List<IS_161_Proyecto_Grupo2.Models.MovimientoInventario>
+
+<h2 class="mb-4 text-center">Reporte de Movimientos de Inventario</h2>
+
+<div class="card shadow">
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>ID Producto</th>
+                    <th>Código Lote</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FechaMovimiento.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@item.TipoMovimiento</td>
+                        <td>@item.ProductoId</td>
+                        <td>@item.CodigoLote</td>
+                        <td>@item.Cantidad</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@model List<IS_161_Proyecto_Grupo2.Models.Factura>
+
+<h2 class="mb-4 text-center">Reporte de Ventas</h2>
+
+<div class="card shadow">
+    <div class="card-body">
+
+        @foreach (var factura in Model)
+        {
+            <div class="border p-3 mb-4">
+
+                <h5>Factura #@factura.IdFactura</h5>
+                <div class="mb-2">
+                    <a class="btn btn-primary btn-sm"
+                       href="/Reporte/Detalle/@factura.IdFactura">
+                        Detalle de Factura
+                    </a>
+                </div>
+                <p><strong>Fecha:</strong> @factura.Fecha.ToString("dd/MM/yyyy HH:mm")</p>
+
+                <table class="table table-bordered text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var detalle in factura.Detalles)
+                        {
+                            <tr>
+                                <td>@detalle.ProductoId</td>
+                                <td>@detalle.Cantidad</td>
+                                <td>L. @detalle.PrecioUnitario</td>
+                                <td>L. @detalle.Subtotal</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="text-end">
+                    <p><strong>Subtotal:</strong> L. @factura.Subtotal()</p>
+                    <p><strong>IVA (15%):</strong> L. @factura.IVA()</p>
+                    <p><strong>Total:</strong> L. @factura.Total()</p>
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>

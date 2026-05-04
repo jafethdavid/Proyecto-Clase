@@ -1,0 +1,35 @@
+﻿@model List<IS_161_Proyecto_Grupo2.Models.Producto>
+
+<h2 class="mb-4 text-center">Reporte de Productos</h2>
+
+<div class="card shadow">
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio Venta</th>
+                    <th>Stock Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.IdProducto</td>
+                        <td>@item.NombreProducto</td>
+                        <td>L. @item.PrecioVenta</td>
+                        <td>
+                            <span class="badge bg-info">
+                                @item.StockTotal()
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model IS_161_Proyecto_Grupo2.Models.Lote
+
+<div class="card shadow col-md-6 mx-auto">
+    <div class="card-header bg-success text-white">
+        Agregar Lote
+    </div>
+
+    <div class="card-body">
+
+        @using (Html.BeginForm())
+        {
+            <input type="hidden" name="idProducto" value="@ViewBag.IdProducto" />
+
+            <div class="mb-3">
+                <label class="form-label">Código Lote</label>
+                <input type="text"
+                       name="CodigoLote"
+                       class="form-control"
+                       value="@ViewBag.CodigoLote"
+                       readonly />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Cantidad</label>
+                @Html.TextBoxFor(m => m.CantidadDisponible,
+                         new { @class = "form-control", type = "number" })
+            </div>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i>  Guardar Lote
+                </button>
+                <a href="/Producto" class="btn btn-secondary">
+                <i class="bi bi-x-circle"></i>  Cancelar
+                </a>
+            </div>
+        }
+
+    </div>
+</div>

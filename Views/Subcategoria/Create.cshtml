@@ -1,0 +1,42 @@
+@model IS_161_Proyecto_Grupo2.Models.Subcategoria
+
+<div class="card shadow col-md-6 mx-auto">
+    <div class="card-header bg-primary text-white">Crear Subcategoría</div>
+    <div class="card-body">
+
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger mb-3" })
+
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Categoría</label>
+                <select name="CategoriaId" class="form-control">
+                    <option value="">Seleccione...</option>
+                    @foreach (var cat in ViewBag.Categorias ?? new List<IS_161_Proyecto_Grupo2.Models.Categoria>())
+                    {
+                        <option value="@cat.IdCategoria" selected="@(ViewBag.IdCategoriaSeleccionada == cat.IdCategoria)">
+                            @cat.Nombre
+                        </option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(m => m.CategoriaId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a href="/Categoria" class="btn btn-secondary">Cancelar</a>
+            </div>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

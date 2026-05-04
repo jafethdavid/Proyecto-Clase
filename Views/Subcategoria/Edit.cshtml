@@ -1,0 +1,32 @@
+@model IS_161_Proyecto_Grupo2.Models.Subcategoria
+
+<div class="card shadow col-md-6 mx-auto">
+    <div class="card-header bg-warning text-white">Editar Subcategoría</div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(m => m.IdSubcategoria)
+
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Nombre, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Categoría Padre</label>
+                <select name="CategoriaId" class="form-control">
+                    @foreach(var cat in ViewBag.Categorias ?? new List<IS_161_Proyecto_Grupo2.Models.Categoria>())
+                    {
+                        <option value="@cat.IdCategoria" selected="@(Model.CategoriaId == cat.IdCategoria)">@cat.Nombre</option>
+                    }
+                </select>
+            </div>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-warning">Actualizar</button>
+                <a href="/Categoria/Edit/@Model.CategoriaId" class="btn btn-secondary">Cancelar</a>
+            </div>
+        }
+    </div>
+</div>

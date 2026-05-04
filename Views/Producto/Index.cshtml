@@ -1,0 +1,74 @@
+﻿@model List<IS_161_Proyecto_Grupo2.Models.Producto>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Lista de Productos</h2>
+
+    <div class="d-flex align-items-center gap-2">
+
+        <a href="/Categoria" class="btn btn-primary">
+            <i class="bi bi-tags"></i> Categorías
+        </a>
+
+        <a href="/Producto/Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nuevo Producto
+        </a>
+
+    </div>
+
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Categoria</th>
+                    <th>Precio Venta</th>
+                    <th>Stock</th>
+                    <th>Agregar Lote</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center">
+                        <td>@item.IdProducto</td>
+                        <td>@item.NombreProducto</td>
+                        <td>@item.Categoria</td>
+                        <td>L. @item.PrecioVenta</td>
+                        <td>
+                            <span class="badge bg-info">
+                                @item.StockTotal()
+                            </span>
+                        </td>
+                        <td>
+                            <a href="/Lote/Create?idProducto=@item.IdProducto"
+                               class="btn btn-sm btn-success">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </td>
+                        <td>
+
+                            <a href="/Producto/Edit/@item.IdProducto"
+                               class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+
+                            <a href="/Producto/Delete/@item.IdProducto"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('¿Seguro que deseas eliminar el producto: @item.NombreProducto ?')">
+                                <i class="bi bi-trash"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

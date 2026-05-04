@@ -1,0 +1,77 @@
+﻿@model List<IS_161_Proyecto_Grupo2.Models.Producto>
+
+<h2 class="mb-4 text-center">Reporte de Lotes por Producto</h2>
+
+<div class="card shadow">
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Código Lote</th>
+                    <th>Fecha Ingreso</th>
+                    <th>Fecha Fin</th>
+                    <th>Cantidad Disponible</th>
+                    <th>Duración (días)</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var producto in Model)
+                {
+                    foreach (var lote in producto.Lotes)
+                    {
+                        <tr>
+
+                            <td>@producto.NombreProducto</td>
+
+                            <td>
+                                <span class="badge bg-secondary">
+                                    @producto.Categoria
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="badge bg-info">
+                                    @lote.CodigoLote
+                                </span>
+                            </td>
+
+                            <td>@lote.FechaIngreso.ToShortDateString()</td>
+
+                            <td>
+                                @(lote.FechaFin == null ? "-" : lote.FechaFin.Value.ToShortDateString())
+                            </td>
+
+                            <td>@lote.CantidadDisponible</td>
+
+                            <td>
+                                @(lote.FechaFin == null
+                                                        ? (DateTime.Now - lote.FechaIngreso).Days
+                                                        : (lote.FechaFin.Value - lote.FechaIngreso).Days)
+                            </td>
+
+                            <td>
+                                @if (lote.CantidadDisponible > 0)
+                                {
+                                    <span class="badge bg-success">Activo</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Agotado</span>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
